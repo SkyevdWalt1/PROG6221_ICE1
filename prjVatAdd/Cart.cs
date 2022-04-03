@@ -8,25 +8,27 @@ namespace prjVatAdd
 {
     class Cart
     {
-        List<double> price = new List<double>();
+        List<Item> itemPrice = new List<Item>();
         String[] itemsString = new string[26];
         double vat;
 
-        public Cart (List<double>price, String[] itemsString, double vat)
+        public Cart(List<Item> itemPrice, String[] itemsString)
         {
-            this.price = price;
+            this.itemPrice = itemPrice;
             this.itemsString = itemsString;
-            this.vat = vat;
         }
 
 
         public double getTotalPrice()
         {
             double total = 0;
-            for (int i = 0; i < price.Count(); i++)
+            for (int i = 0; i < itemPrice.Count(); i++)
             {
-                total = total + price[i];
+                Item b = (Item)itemPrice[i];
+                total = total + b.price;
             }
+
+            vat = total * 0.14;
 
             return total;
         }
@@ -36,16 +38,17 @@ namespace prjVatAdd
         {
             String display = "";
 
-            for (int i = 0; i < price.Count(); i++)
+            for (int i = 0; i < itemPrice.Count(); i++)
             {
-                display += "Item " + itemsString[i] + " R " + price[i] + "\n";
+                Item b = (Item)itemPrice[i];
+                display += "Item " + itemsString[i] + " R " + b.price + "\n";
             }
 
             display += "-------------------------" + "\n" +
             "TOTAL R " + getTotalPrice() + "\n" +
             "+ VAT R " + vat + "\n" +
             "-------------------------" + "\n" +
-            "Grand Total: R " + (getTotalPrice()+vat)+
+            "Grand Total: R " + (getTotalPrice() + vat) +
             "\n-------------------------" + "\n";
 
 

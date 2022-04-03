@@ -9,32 +9,39 @@ namespace prjVatAdd
     {
         static void Main(string[] args)
         {
-            List<double> price = new List<double>();
-            String[] itemsString = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-            String check = ""; 
+            List<Item> itemPrice = new List<Item>();
+            List<double> itemVat = new List<double>();
+            String[] itemsString = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+
+
+            String check = "";
             int i = 0;
-            while (i<26 && check != "x") {
+            while (i < 26 && check != "x")
+            {
                 try
                 {
-                    Console.WriteLine("Enter price of Item " + itemsString[i]+ ", or press 'x' to exit.");
+                    Console.WriteLine("Enter price of Item " + itemsString[i] + ", or press 'x' to exit.");
                     check = Console.ReadLine();
                     if (check == "x")
                     {
-                        Console.WriteLine("Iteration ends..."+"\n");
+                        Console.WriteLine("Iteration ends..." + "\n");
                     }
-                    else {
-                        price.Add(Convert.ToInt32(check));
+                    else
+                    {
+                        Item obj = new Item(Convert.ToInt32(check));
+                        itemPrice.Add(obj);
+
+                        itemVat.Add(obj.calculateVat());
                         ++i;
                     }
                 }
-                catch {
+                catch
+                {
                     Console.WriteLine("Error in input provided!");
                 }
             }
 
-            Item firstObj = new Item(price, itemsString);
-            Cart secondObj = new Cart(price, itemsString, firstObj.calculateVat());
-
+            Cart secondObj = new Cart(itemPrice, itemsString);
             Console.WriteLine(secondObj.ToString());
         }
     }
