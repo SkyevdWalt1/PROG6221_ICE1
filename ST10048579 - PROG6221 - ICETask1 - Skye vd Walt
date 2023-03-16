@@ -1,0 +1,56 @@
+class ScriptMarking
+{
+
+    static void Main(string[] args)
+    {
+        //Roep die method
+        Marking();
+
+    }
+
+    static void Marking()
+    {
+        //INPUT
+        int iNumOfScripts = 0;
+        Console.WriteLine("Enter the total number of scripts to be marked. This value must be greater than 0.");
+        iNumOfScripts = Convert.ToInt32(Console.ReadLine());
+
+
+        int iNumOfQuestions = 0;
+        Console.WriteLine("Enter the number of questions constituting the test. This value must be between 1 and 10, both values inclusive.");
+        iNumOfQuestions = Convert.ToInt32(Console.ReadLine());
+
+        int iSubtotal = 0;
+        Console.WriteLine("Enter the subtotal of each question. Each subtotal must be greater than 0.");
+        iSubtotal = Convert.ToInt32(Console.ReadLine());
+
+        int iNumOfLecturers = 0;
+        Console.WriteLine("Enter the number of lecturers who are going to mark the scripts. The value must be more than 0.");
+        iNumOfLecturers = Convert.ToInt32(Console.ReadLine());
+
+       
+        //CALCULATIONS
+        //Estimated time it will take a lecturer to finsih , 2sec p. question 
+        Double Time = 0;
+        int Tick = 2;
+
+        Time = Tick * iNumOfQuestions * iSubtotal * iNumOfScripts;
+        Time = Time / 60;
+
+        if (Time > 0.5 && Time < 1)
+        {
+            Time = Time + 1;
+        }
+        else
+        {
+            Time = Time;
+        }
+
+        Console.WriteLine("The estimated time it will take to finish marking will be: " + Time + " minutes ");
+
+        //Number of scripts p lecturer
+        int iNumPerLecturer = 0;
+        iNumPerLecturer = iNumOfScripts / iNumOfLecturers;
+        Console.WriteLine("Number of scripts per lecturer will be: " + iNumPerLecturer);
+    }
+}
